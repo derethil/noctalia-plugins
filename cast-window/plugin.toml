@@ -1,0 +1,33 @@
+id           = "derethil/cast-window"
+name         = "Cast Window"
+version      = "1.0.0"
+plugin_api   = 24
+author       = "derethil"
+license      = "MIT"
+icon         = "cast"
+description  = "Pick a window to screencast using niri's Dynamic Cast Target."
+tags         = ["niri", "screencast"]
+dependencies = ["niri"]
+
+[[service]]
+id    = "watcher"
+entry = "watcher.luau"
+
+[[widget]]
+id    = "cast"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key             = "inactive_mode"
+  type            = "select"
+  label_key       = "settings.inactive_mode.label"
+  description_key = "settings.inactive_mode.description"
+  default         = "dim"
+
+    [[widget.setting.options]]
+    value     = "dim"
+    label_key = "settings.inactive_mode.dim"
+
+    [[widget.setting.options]]
+    value     = "hide"
+    label_key = "settings.inactive_mode.hide"

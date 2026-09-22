@@ -1,0 +1,8 @@
+{
+  "settings.inactive_mode.label": "When no cast is using the dynamic target",
+  "settings.inactive_mode.description": "How the widget behaves while no screencast is following niri's Dynamic Cast Target.",
+  "settings.inactive_mode.dim": "Dim the icon",
+  "settings.inactive_mode.hide": "Hide the widget",
+  "tooltip.active": "Cast Window",
+  "tooltip.inactive": "Cast Window (no dynamic cast target)"
+}
