@@ -10,3 +10,16 @@ deprecated   = false
 plugin_api   = 24
 tags         = ["niri", "screencast"]
 dependencies = ["niri"]
+
+[[plugin]]
+id           = "derethil/hue-manager"
+name         = "Hue Manager"
+version      = "1.0.0"
+author       = "derethil"
+license      = "MIT"
+icon         = "bulb"
+description  = "Control your Philips Hue lights, rooms, and scenes from Noctalia."
+deprecated   = false
+plugin_api   = 31
+tags         = ["hue", "lights", "smart-home"]
+dependencies = []
