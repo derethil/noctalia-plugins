@@ -1,0 +1,58 @@
+id           = "derethil/hue-manager"
+name         = "Hue Manager"
+version      = "1.0.0"
+plugin_api   = 31
+author       = "derethil"
+license      = "MIT"
+icon         = "bulb"
+description  = "Control your Philips Hue lights, rooms, and scenes from Noctalia."
+tags         = ["hue", "lights", "smart-home"]
+dependencies = []
+
+[[setting]]
+key             = "use_device_icons"
+type            = "bool"
+label_key       = "settings.use_device_icons.label"
+description_key = "settings.use_device_icons.description"
+default         = true
+
+[[setting]]
+key             = "auto_sync_accent"
+type            = "bool"
+label_key       = "settings.auto_sync_accent.label"
+description_key = "settings.auto_sync_accent.description"
+default         = false
+
+[[setting]]
+key             = "sync_rooms"
+type            = "string_list"
+label_key       = "settings.sync_rooms.label"
+description_key = "settings.sync_rooms.description"
+default         = []
+
+[[setting]]
+key             = "bridge_ip"
+type            = "string"
+label_key       = "settings.bridge_ip.label"
+description_key = "settings.bridge_ip.description"
+default         = ""
+advanced        = true
+
+
+[[service]]
+id    = "bridge"
+entry = "service.luau"
+
+[[panel]]
+id                       = "panel"
+entry                    = "panel.luau"
+width                    = 520
+height                   = 480
+placement                = "attached"
+position                 = "auto"
+open_near_click          = true
+dismiss_on_outside_click = true
+
+[[widget]]
+id    = "hue"
+entry = "widget.luau"
