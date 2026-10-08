@@ -26,23 +26,7 @@ function M.row(ctx, entity, extraActions)
 		ctx.render()
 	end
 
-	local body = {
-		shared.actionRow(
-			ctx,
-			"power",
-			noctalia.tr("row.power"),
-			accent,
-			entity,
-			ui.toggle({
-				key = "power-toggle-" .. entity.id,
-				checked = entity.on == true,
-				enabled = not pending,
-				onChange = function(value)
-					ctx.send({ kind = "power", target = entity.kind, id = entity.id, on = value == "true" })
-				end,
-			})
-		),
-	}
+	local body = {}
 
 	if entity.dimming ~= nil then
 		local key = actions.brightnessKey(entity.kind, entity.id)
