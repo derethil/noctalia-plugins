@@ -2,8 +2,9 @@
 
 Control your Philips Hue lights, rooms, and scenes from a Noctalia bar widget.
 
-This is the Noctalia rewrite of [dms-hue-manager](https://github.com/derethil/dms-hue-manager).
-It communicates directly with the bridge over the Hue CLIP v2 API.
+This is the Noctalia rewrite of
+[dms-hue-manager](https://github.com/derethil/dms-hue-manager). It communicates
+directly with the bridge over the Hue CLIP v2 API.
 
 ## Features
 
@@ -12,7 +13,7 @@ It communicates directly with the bridge over the Hue CLIP v2 API.
 - Scene recall per room, with the active scene shown
 - Live updates from the bridge's event stream — changes made in the Hue app
   appear instantly
-- Room and light icons derived from the Hue archetype
+- Hue room and light icons matched to the bridge archetype
 - Accent sync: follow the Noctalia accent colour on theme change, for all rooms
   or a chosen subset
 - Guided pairing, including a one-time import of existing `openhue` credentials
@@ -24,9 +25,9 @@ It communicates directly with the bridge over the Hue CLIP v2 API.
 A Philips Hue bridge on your network is required.
 
 For local bridge discovery, the plugin uses `avahi-browse` when it is available
-on `PATH`; otherwise it falls back to Hue's public discovery service. You do
-not need to install Avahi when that fallback works, but `avahi-browse` is the
-more reliable option on networks where public discovery is unavailable.
+on `PATH`; otherwise it falls back to Hue's public discovery service. You do not
+need to install Avahi when that fallback works, but `avahi-browse` is the more
+reliable option on networks where public discovery is unavailable.
 
 ## Install
 
@@ -58,7 +59,7 @@ Edited in **Settings → Plugins → Hue Manager**:
 
 | Setting                 | Default | Description                                                     |
 | ----------------------- | ------- | --------------------------------------------------------------- |
-| Use device icons        | on      | Icon per Hue archetype instead of a generic bulb                |
+| Use device icons        | on      | Icon per Hue archetype instead of a generic door or bulb        |
 | Auto-sync accent colour | off     | Apply the shell accent to the synced rooms on theme change      |
 | Rooms to sync           | empty   | Room names that follow the accent colour; empty means all rooms |
 | Bridge IP override      | empty   | Skip discovery and use a fixed address                          |
@@ -111,3 +112,9 @@ nix-shell -p luau --run 'cd hue-manager && for f in tests/*_test.luau; do luau "
 resolve module paths differently. The `ui/` modules are not loaded by the CLI,
 so they can require each other and `lib/` modules. `service.luau` wires together
 the transport, pairing, command, and state modules.
+
+## Icon attribution
+
+The bundled Hue icons are derived from
+[hass-hue-icons](https://github.com/arallsopp/hass-hue-icons) by Andrew Allsopp
+and are licensed under [CC BY-NC-SA 4.0](assets/hue-icons/LICENSE).

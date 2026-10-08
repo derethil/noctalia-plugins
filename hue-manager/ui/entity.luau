@@ -1,13 +1,21 @@
 local icons = require("../lib/icons.luau")
 local actions = require("./actions.luau")
+local hueIcon = require("./hue_icon.luau")
 local shared = require("./shared.luau")
 
 local M = {}
 local latestSliderValue = {}
 
-local function glyph(ctx, entity): string
+local function iconName(ctx, entity): string
 	return entity.kind == "room" and icons.forRoom(entity.archetype, ctx.useDeviceIcons())
 		or icons.forLight(entity.archetype, ctx.useDeviceIcons())
+end
+
+local function entityIcon(ctx, entity, color)
+	if not ctx.useDeviceIcons() then
+		return ui.glyph({ name = iconName(ctx, entity), size = 16, color = color })
+	end
+	return hueIcon.node(iconName(ctx, entity), color, 16)
 end
 
 function M.row(ctx, entity, extraActions)
@@ -83,7 +91,7 @@ function M.row(ctx, entity, extraActions)
 	end
 
 	local header = {
-		ui.glyph({ name = glyph(ctx, entity), size = 16, color = shared.dimmed(accent, entity) }),
+		entityIcon(ctx, entity, shared.dimmed(accent, entity)),
 		ui.label({ text = entity.name, fontSize = 14, flexGrow = 1, color = shared.dimmed("on_surface", entity) }),
 	}
 

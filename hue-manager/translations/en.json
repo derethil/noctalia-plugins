@@ -1,6 +1,6 @@
 {
   "settings.use_device_icons.label": "Use device icons",
-  "settings.use_device_icons.description": "Map each room and light to an icon matching its Hue archetype instead of a generic bulb.",
+  "settings.use_device_icons.description": "Map each room and light to an icon matching its Hue archetype instead of a generic door or bulb.",
   "settings.auto_sync_accent.label": "Auto-sync accent colour",
   "settings.auto_sync_accent.description": "Apply the shell accent colour to the selected rooms whenever the theme palette changes.",
   "settings.sync_rooms.label": "Rooms to sync",

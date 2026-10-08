@@ -72,7 +72,7 @@ function M.render(ctx)
 			"",
 			{
 				ui.row({ key = "master-power-row", align = "center", gap = 8, minHeight = 44 }, {
-					ui.label({ text = noctalia.tr("panel.title"), fontSize = 14, flexGrow = 1 }),
+					ui.label({ text = noctalia.tr("panel.title"), fontSize = 14, fontWeight = "bold", flexGrow = 1 }),
 					ui.label({
 						text = noctalia.trp("panel.lights_on", total, { on = tostring(on), total = tostring(total) }),
 						fontSize = 13,

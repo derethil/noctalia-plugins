@@ -2,92 +2,92 @@
 
 local M = {}
 
-local FALLBACK = "bulb"
+local ROOM_FALLBACK = "door"
+local LIGHT_FALLBACK = "bulb-classic"
 
-local ROOM_GLYPHS: { [string]: string } = {
-	living_room = "sofa",
-	kitchen = "tools-kitchen-2",
-	dining = "tools-kitchen-3",
-	bedroom = "bed",
-	kids_bedroom = "bed",
-	guest_room = "bed",
-	bathroom = "bath",
-	toilet = "toilet-paper",
-	nursery = "baby-carriage",
-	office = "desk",
-	staircase = "stairs",
-	hallway = "door",
-	front_door = "door-enter",
-	laundry_room = "wash-machine",
-	storage = "box",
-	closet = "hanger",
-	garage = "car-garage",
-	carport = "car",
-	driveway = "car",
-	gym = "barbell",
-	lounge = "armchair",
-	tv = "device-tv",
-	computer = "device-desktop",
-	recreation = "device-gamepad-2",
-	man_cave = "device-gamepad-2",
-	music = "headphones",
-	reading = "book",
-	studio = "palette",
-	garden = "plant",
-	terrace = "fence",
-	balcony = "building-arch",
-	pool = "pool",
-	barbecue = "grill",
+local ROOM_ICONS: { [string]: string } = {
+	living_room = "room-living",
+	kitchen = "room-kitchen",
+	dining = "room-dining",
+	bedroom = "room-bedroom",
+	kids_bedroom = "room-kids",
+	guest_room = "room-guestroom",
+	bathroom = "room-bathroom",
+	toilet = "room-toilet",
+	nursery = "room-nursery",
+	office = "room-office",
+	staircase = "room-stairs",
+	hallway = "room-hallway",
+	front_door = "room-front-door",
+	laundry_room = "room-laundry",
+	storage = "room-storage",
+	closet = "room-closet",
+	garage = "room-garage",
+	carport = "room-carport",
+	driveway = "room-driveway",
+	gym = "room-gym",
+	lounge = "room-lounge",
+	tv = "room-recreation",
+	computer = "room-computer",
+	recreation = "room-recreation",
+	man_cave = "room-games",
+	music = "room-recreation",
+	reading = "room-other",
+	studio = "room-studio",
+	garden = "room-outdoors",
+	terrace = "room-terrace",
+	balcony = "room-balcony",
+	pool = "room-pool",
+	barbecue = "room-bbq",
 	home = "home",
-	downstairs = "arrow-down",
-	upstairs = "arrow-up",
-	top_floor = "building",
-	attic = "home-2",
-	other = "door",
+	downstairs = "downstairs",
+	upstairs = "upstairs",
+	top_floor = "upstairs",
+	attic = "room-attic",
+	other = "room-other",
 }
 
-local LIGHT_GLYPHS: { [string]: string } = {
-	table_shade = "lamp",
-	table_wash = "lamp",
-	flexible_lamp = "lamp",
-	desk_lamp = "lamp",
-
-	floor_shade = "lamp-2",
-	floor_lantern = "lamp-2",
-	bollard = "lamp-2",
-	ground_spot = "lamp-2",
-	recessed_floor = "lamp-2",
-	wall_washer = "lamp-2",
-	wall_lantern = "lamp-2",
-	wall_shade = "lamp-2",
-	wall_spot = "lamp-2",
-	up_and_down = "lamp-2",
-	up_and_down_down = "lamp-2",
-	up_and_down_up = "lamp-2",
-
-	christmas_tree = "christmas-tree",
-	hue_lightstrip = "line",
-	hue_lightstrip_tv = "device-tv",
-	hue_go = "device-mobile",
-	hue_bloom = "flower",
-	string_light = "line-dashed",
+local LIGHT_ICONS: { [string]: string } = {
+	table_shade = "table-shade",
+	table_wash = "table-wash",
+	flexible_lamp = "desk-lamp",
+	desk_lamp = "desk-lamp",
+	floor_shade = "floor-shade",
+	floor_lantern = "floor-lantern",
+	bollard = "bollard",
+	ground_spot = "floor-spot",
+	recessed_floor = "recessed-floor",
+	wall_washer = "wall-spot",
+	wall_lantern = "wall-lantern",
+	wall_shade = "wall-shade",
+	wall_spot = "wall-spot",
+	up_and_down = "wall-spot",
+	up_and_down_down = "wall-spot",
+	up_and_down_up = "wall-spot",
+	ceiling_round = "ceiling-round",
+	ceiling_square = "ceiling-square",
+	pendant_round = "pendant-round",
+	pendant_long = "pendant-long",
+	recessed_ceiling = "recessed-ceiling",
+	christmas_tree = "bulb-sultan",
+	hue_lightstrip = "lightstrip",
+	hue_lightstrip_tv = "lightstrip-tv",
+	hue_go = "go",
+	hue_bloom = "bloom",
+	string_light = "lightstrip",
 	plug = "plug",
-	vintage_candle_bulb = "flame",
-	candle_bulb = "flame",
+	vintage_candle_bulb = "bulb-filament",
+	candle_bulb = "bulb-candle",
 }
 
 function M.forRoom(archetype: string?, useDeviceIcons: boolean): string
-	if not useDeviceIcons then
-		return FALLBACK
-	end
-	return ROOM_GLYPHS[archetype or ""] or FALLBACK
+	if not useDeviceIcons then return ROOM_FALLBACK end
+	return ROOM_ICONS[archetype or ""] or ROOM_FALLBACK
 end
 
 function M.forLight(archetype: string?, useDeviceIcons: boolean): string
-	if not useDeviceIcons then
-		return FALLBACK
-	end
-	return LIGHT_GLYPHS[archetype or ""] or FALLBACK
+	if not useDeviceIcons then return "bulb" end
+	return LIGHT_ICONS[archetype or ""] or LIGHT_FALLBACK
 end
 
 return M
