@@ -43,6 +43,10 @@ advanced        = true
 id    = "bridge"
 entry = "service.luau"
 
+[[shortcut]]
+id    = "hue-toggle"
+entry = "shortcut.luau"
+
 [[panel]]
 id                       = "panel"
 entry                    = "panel.luau"

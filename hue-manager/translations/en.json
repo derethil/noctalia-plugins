@@ -8,6 +8,7 @@
   "warn.sync_rooms_unmatched": "sync_rooms names matched no room on the bridge: {names}",
   "settings.bridge_ip.label": "Bridge IP override",
   "settings.bridge_ip.description": "Leave empty to discover the bridge automatically or reuse the address openhue already paired with.",
+  "shortcut.hue_toggle": "Philips Hue Lights",
   "widget.tooltip.connecting": "Hue: connecting…",
   "widget.tooltip.unpaired": "Hue: bridge not paired",
   "widget.tooltip.error": "Hue: {message}",
