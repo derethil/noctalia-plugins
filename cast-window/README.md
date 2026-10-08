@@ -21,7 +21,7 @@ mode** widget setting.
 Add this repo as a plugin source and enable the plugin:
 
 ```sh
-noctalia msg plugins source add derethil path ~/development/personal/noctalia-plugins
+noctalia msg plugins source add derethil git https://github.com/derethil/noctalia-plugins.git
 noctalia msg plugins enable derethil/cast-window
 ```
 
