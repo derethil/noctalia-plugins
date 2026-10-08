@@ -10,13 +10,6 @@ tags         = ["hue", "lights", "smart-home"]
 dependencies = []
 
 [[setting]]
-key             = "use_device_icons"
-type            = "bool"
-label_key       = "settings.use_device_icons.label"
-description_key = "settings.use_device_icons.description"
-default         = true
-
-[[setting]]
 key             = "auto_sync_accent"
 type            = "bool"
 label_key       = "settings.auto_sync_accent.label"
@@ -56,6 +49,13 @@ placement                = "attached"
 position                 = "auto"
 open_near_click          = true
 dismiss_on_outside_click = true
+
+[[panel.setting]]
+key             = "use_device_icons"
+type            = "bool"
+label_key       = "settings.use_device_icons.label"
+description_key = "settings.use_device_icons.description"
+default         = true
 
 [[widget]]
 id    = "hue"
