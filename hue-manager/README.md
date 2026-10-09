@@ -74,11 +74,14 @@ whether or not auto-sync is on.
 ### Enabling accent sync
 
 Auto-sync uses Noctalia's `colors_changed` hook; the plugin does not install the
-hook or poll for palette changes. Add this to `~/.config/noctalia/config.toml`:
+hook or poll for palette changes. It is also recommended to refresh the plugin
+when the session is unlocked, since the bridge event stream may have gone stale
+while the system was asleep. Add this to `~/.config/noctalia/config.toml`:
 
 ```toml
 [hooks]
 colors_changed = "noctalia msg plugin derethil/hue-manager:bridge all sync-accent"
+session_unlocked = "noctalia msg plugin derethil/hue-manager:bridge all refresh"
 ```
 
 Then enable **Auto-sync accent colour**. The panel's sync button applies the
