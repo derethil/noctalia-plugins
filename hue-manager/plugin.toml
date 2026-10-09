@@ -1,6 +1,6 @@
 id           = "derethil/hue-manager"
 name         = "Hue Manager"
-version      = "1.0.0"
+version      = "1.1.0"
 plugin_api   = 31
 author       = "derethil"
 license      = "MIT"

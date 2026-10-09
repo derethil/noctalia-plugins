@@ -10,6 +10,7 @@ local RESOURCE_TYPES = { "room", "device", "light", "grouped_light", "scene" }
 function M.create(state: State, publish, setStatus, rememberResourceBrightness)
 	local fetching = false
 	local stream = { handle = nil, attempt = 0, nextAttemptMs = 0, refetchPending = false, openedMs = 0 }
+	local recovery = { pending = false, probing = false, attempt = 0, nextProbeMs = 0 }
 
 	local function credentialsPath(): string?
 		local dir = noctalia.pluginDataDir()
@@ -149,6 +150,47 @@ function M.create(state: State, publish, setStatus, rememberResourceBrightness)
 		end
 	end
 
+	local function scheduleProbe()
+		recovery.attempt += 1
+		recovery.nextProbeMs = noctalia.nowMs() + policy.backoffMs(recovery.attempt)
+	end
+
+	local function probeBridge()
+		if recovery.probing or state.bridgeIp == nil then
+			return
+		end
+
+		recovery.probing = true
+		local accepted = noctalia.http({
+			url = "https://" .. state.bridgeIp .. "/",
+			allow_insecure_tls = true,
+		}, function(response)
+			recovery.probing = false
+			if not recovery.pending then
+				return
+			end
+
+			if response.ok then
+				recovery.pending, recovery.attempt, recovery.nextProbeMs = false, 0, 0
+				noctalia.log("bridge reachable after resume; refreshing state")
+				refresh()
+			else
+				scheduleProbe()
+			end
+		end)
+
+		if not accepted then
+			recovery.probing = false
+			scheduleProbe()
+		end
+	end
+
+	local function recoverAfterResume()
+		stopStream()
+		recovery.pending, recovery.probing, recovery.attempt, recovery.nextProbeMs = true, false, 0, 0
+		noctalia.log("waiting for Hue bridge after resume")
+	end
+
 	local function connectStream()
 		if stream.handle ~= nil or state.bridgeIp == nil or state.key == nil then
 			return
@@ -269,6 +311,13 @@ function M.create(state: State, publish, setStatus, rememberResourceBrightness)
 			return
 		end
 
+		if recovery.pending then
+			if not recovery.probing and noctalia.nowMs() >= recovery.nextProbeMs then
+				probeBridge()
+			end
+			return
+		end
+
 		if stream.handle == nil and noctalia.nowMs() >= stream.nextAttemptMs then
 			if stream.refetchPending then
 				stream.refetchPending = false
@@ -284,6 +333,7 @@ function M.create(state: State, publish, setStatus, rememberResourceBrightness)
 		connectStream = connectStream,
 		importOpenhueCredentials = importOpenhueCredentials,
 		loadSavedCredentials = loadSavedCredentials,
+		recoverAfterResume = recoverAfterResume,
 		refresh = refresh,
 		request = request,
 		saveCredentials = saveCredentials,
